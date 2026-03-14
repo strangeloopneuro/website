@@ -581,6 +581,7 @@
     }
     @media (max-width: 768px) {
       .founder-profile { grid-template-columns: 1fr; }
+      .desktop-break { display: none; }
     }
 
     /* ── CTA BLOCK ── */
@@ -710,7 +711,7 @@
     <section class="section" style="padding-top: clamp(80px, 8vw, 100px);">
       <div class="reveal">
         <div class="section-eyebrow">Research</div>
-        <h2 class="section-title">Expanding the Realm of Conscious Control<br>by Engineering Strange Loops</h2>
+        <h2 class="section-title">Expanding the Realm of Conscious Control<br class="desktop-break"> by Engineering Strange Loops</h2>
         <p class="section-desc">Our research pushes the boundaries of what is possible in brain-computer interfacing, laying the groundwork for a new approach to Human-AI integration. We coined the terms B2AI (Brain-to-AI Interface), Therapeutic Neural Reinforcement (TNR), and BasCI (Basal Cognitive Interfacing) to encapsulate the full scope of our paradigm.</p>
       </div>
     </section>
@@ -916,10 +917,19 @@
       const els = document.querySelectorAll('.page.active .reveal');
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            e.target.dataset.revealed = 'true';
+            obs.unobserve(e.target);
+          }
         });
       }, { threshold: 0.12 });
-      els.forEach(el => { el.classList.remove('visible'); obs.observe(el); });
+      els.forEach(el => {
+        if (el.dataset.revealed !== 'true') {
+          el.classList.remove('visible');
+          obs.observe(el);
+        }
+      });
     }
     initReveal();
 
