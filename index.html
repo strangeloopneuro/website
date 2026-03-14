@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Strange Loop Neurosciences — Non-Invasive Brain-to-AI Interfaces</title>
-  <meta name="description" content="Strange Loop Neurosciences is a research lab pioneering novel BCI paradigms and developing non-invasive neural interface systems to connect human cognition directly to artificial intelligence, all without surgery.">
+  <title>Strange Loop Neurosciences</title>
+  <meta name="description" content="Strange Loop Neurosciences is a research lab pioneering novel BCI paradigms and developing non-invasive interface systems to connect human cognition directly to artificial intelligence, all without surgery.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Strange Loop Neurosciences — Non-Invasive Brain-to-AI Interfaces">
+  <meta property="og:description" content="Building the world's first non-invasive brain-to-AI interface. Pioneering B2AI, Therapeutic Neural Reinforcement, and Basal Cognitive Interfacing.">
+  <meta property="og:url" content="https://strangeloopneuro.com">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500;700&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -93,6 +101,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
+      overflow: hidden;
     }
     .nav-logo-mark::before {
       content: '';
@@ -101,7 +110,13 @@
       border: 1px solid rgba(0,210,190,0.25);
       border-radius: 50%;
     }
-    .nav-logo-mark svg { width: 14px; height: 14px; }
+    .nav-logo-mark img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
     .nav-logo-text {
       font-family: var(--font-mono);
       font-size: 11.5px;
@@ -153,30 +168,50 @@
     /* ── HERO ── */
     .hero {
       min-height: calc(100vh - 68px);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 80px clamp(24px, 5vw, 64px); position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; position: relative; overflow: hidden;
     }
-    .hero-bg { position: absolute; inset: 0; pointer-events: none; }
-    .hero-bg::before {
-      content: ''; position: absolute; inset: 0;
+    .hero-top {
+      position: relative;
+      z-index: 3;
+      padding: clamp(60px, 8vw, 100px) clamp(24px, 5vw, 64px) 32px;
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      background: transparent;
+    }
+    .hero-canvas-band {
+      position: relative;
+      width: 100%;
+      height: clamp(260px, 35vw, 420px);
+      flex-shrink: 0;
+    }
+    .hero-canvas-band::before {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 50% at 50% 45%, rgba(0,210,190,0.05) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 25% 60%, rgba(77,141,255,0.03) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 35% at 75% 35%, rgba(140,80,255,0.025) 0%, transparent 70%);
+        linear-gradient(to bottom, var(--bg-primary) 0%, transparent 15%),
+        linear-gradient(to top, var(--bg-primary) 0%, transparent 15%);
     }
-    #neural-canvas { position: absolute; inset: 0; pointer-events: none; }
-    .hero-content { position: relative; z-index: 2; max-width: 920px; }
-    .hero-badge {
-      display: inline-block; font-family: var(--font-mono); font-size: 10px; font-weight: 500;
-      letter-spacing: 4px; text-transform: uppercase; color: var(--accent);
-      padding: 8px 22px; border: 1px solid var(--border-accent); border-radius: 100px;
-      background: var(--accent-glow); margin-bottom: 44px;
-      animation: pageReveal 0.6s var(--ease-out) 0.15s both;
+    .hero-canvas-band::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 70% at 50% 50%, rgba(0,210,190,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 50% at 30% 55%, rgba(77,141,255,0.04) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 45% at 70% 40%, rgba(140,80,255,0.03) 0%, transparent 65%);
+    }
+    #neural-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+    .hero-bottom {
+      position: relative;
+      z-index: 3;
+      padding: 32px clamp(24px, 5vw, 64px) clamp(60px, 8vw, 100px);
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
     }
     .hero h1 {
       font-family: var(--font-display); font-size: clamp(36px, 5.5vw, 72px);
       font-weight: 400; line-height: 1.05; letter-spacing: -1.5px;
-      animation: pageReveal 0.6s var(--ease-out) 0.3s both;
+      animation: pageReveal 0.6s var(--ease-out) 0.15s both;
     }
     .hero h1 em {
       font-style: italic;
@@ -185,7 +220,7 @@
     }
     .hero-sub {
       font-size: clamp(16px, 2vw, 19px); color: var(--text-secondary); max-width: 600px;
-      margin: 32px auto 0; line-height: 1.75; font-weight: 300;
+      margin: 0 auto; line-height: 1.75; font-weight: 300;
       animation: pageReveal 0.6s var(--ease-out) 0.45s both;
     }
     .hero-est {
@@ -204,12 +239,38 @@
       font-family: var(--font-mono); font-size: 10.5px; font-weight: 500;
       letter-spacing: 2px; text-transform: uppercase; padding: 14px 30px;
       border-radius: 4px; cursor: pointer; transition: all 0.35s var(--ease-out);
-      border: none; outline: none; display: inline-block;
+      border: none; outline: none; display: inline-block; text-decoration: none;
     }
     .btn-primary { background: var(--accent); color: var(--bg-primary); }
     .btn-primary:hover { box-shadow: 0 0 36px rgba(0,210,190,0.25), 0 4px 16px rgba(0,210,190,0.15); transform: translateY(-2px); }
     .btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-medium); }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+    /* ── QUOTE ── */
+    .quote-block {
+      text-align: center;
+      padding: 0 clamp(24px, 5vw, 80px);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      letter-spacing: -0.2px;
+    }
+    .quote-attr {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: 20px;
+    }
 
     /* ── STATS ── */
     .stats-row {
@@ -227,7 +288,7 @@
     .stat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-tertiary); margin-top: 10px; }
 
     /* ── SECTIONS ── */
-    .section { padding: clamp(80px, 10vw, 128px) clamp(24px, 5vw, 56px); max-width: 1160px; margin: 0 auto; }
+    .section { padding: clamp(40px, 5vw, 64px) clamp(24px, 5vw, 56px); max-width: 1160px; margin: 0 auto; }
     .section-eyebrow {
       font-family: var(--font-mono); font-size: 10px; font-weight: 500;
       letter-spacing: 4px; text-transform: uppercase; color: var(--accent);
@@ -238,7 +299,7 @@
       font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 54px);
       font-weight: 400; line-height: 1.12; letter-spacing: -0.5px; margin-bottom: 20px;
     }
-    .section-desc { font-size: 16.5px; color: var(--text-secondary); max-width: 580px; line-height: 1.8; font-weight: 300; margin-bottom: 60px; }
+    .section-desc { font-size: 16.5px; color: var(--text-secondary); max-width: 580px; line-height: 1.8; font-weight: 300; margin-bottom: 36px; }
 
     /* ── CARDS ── */
     .card-grid {
@@ -281,6 +342,162 @@
     .service-item h3 { font-size: 20px; font-weight: 500; margin-bottom: 10px; letter-spacing: -0.2px; }
     .service-item p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.75; font-weight: 300; max-width: 600px; }
 
+    /* ── RESEARCH PILLARS ── */
+    .research-pillar {
+      margin-bottom: 100px;
+    }
+    .research-pillar:last-of-type { margin-bottom: 0; }
+    .pillar-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-medium);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .pillar-header.reverse .pillar-text { order: 2; }
+    .pillar-header.reverse .pillar-visual { order: 1; }
+    .pillar-text {
+      background: var(--bg-surface);
+      padding: clamp(36px, 5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .pillar-number {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pillar-number::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent-dim);
+    }
+    .pillar-text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      margin-bottom: 18px;
+    }
+    .pillar-text h3 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pillar-text p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .pillar-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .pillar-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      padding: 5px 14px;
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      background: var(--accent-glow);
+    }
+    .pillar-visual {
+      background: var(--bg-surface);
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-img-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+    }
+    .pillar-img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    /* Placeholder state when no image is loaded yet */
+    .pillar-img-placeholder .placeholder-icon {
+      font-size: 40px;
+      color: var(--accent);
+      opacity: 0.15;
+    }
+    .pillar-img-placeholder .placeholder-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+    /* Sub-details grid under each pillar */
+    .pillar-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-medium);
+      border: 1px solid var(--border-medium);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+    .pillar-detail {
+      background: var(--bg-surface);
+      padding: clamp(24px, 3vw, 36px);
+      transition: background 0.3s;
+    }
+    .pillar-detail:hover { background: var(--bg-surface-2); }
+    .pillar-detail h4 {
+      font-size: 14.5px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .pillar-detail p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    @media (max-width: 960px) {
+      .pillar-header { grid-template-columns: 1fr; }
+      .pillar-header.reverse .pillar-text { order: 1; }
+      .pillar-header.reverse .pillar-visual { order: 2; }
+      .pillar-details { grid-template-columns: 1fr; }
+    }
+
     /* ── PUBLICATIONS ── */
     .pub-list {
       display: flex; flex-direction: column; gap: 1px;
@@ -297,35 +514,80 @@
     .pub-journal { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--accent-dim); margin-top: 5px; }
     .pub-year { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--text-tertiary); white-space: nowrap; }
 
-    /* ── TEAM ── */
-    .team-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: var(--border-medium); border: 1px solid var(--border-medium);
-      border-radius: 8px; overflow: hidden;
-    }
-    .team-card {
-      background: var(--bg-surface); padding: clamp(32px, 4vw, 48px) clamp(24px, 3vw, 36px);
-      text-align: center; transition: background 0.4s ease;
-    }
-    .team-card:hover { background: var(--bg-surface-2); }
-    .team-avatar {
-      width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 22px;
-      background: linear-gradient(145deg, var(--bg-surface-2), rgba(0,210,190,0.05));
+    /* ── FOUNDER ── */
+    .founder-profile {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1px;
+      background: var(--border-medium);
       border: 1px solid var(--border-medium);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono); font-size: 16px; font-weight: 500;
-      color: var(--accent); letter-spacing: 2px; position: relative;
+      border-radius: 8px;
+      overflow: hidden;
     }
-    .team-avatar::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid rgba(0,210,190,0.08); }
-    .team-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
-    .team-role { font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-dim); display: block; margin-bottom: 16px; }
-    .team-bio { font-size: 13px; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+    .founder-photo {
+      background: var(--bg-surface);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(36px, 4vw, 56px) clamp(24px, 3vw, 36px);
+      gap: 24px;
+    }
+    .founder-avatar {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: linear-gradient(145deg, var(--bg-surface-2), rgba(0,210,190,0.06));
+      border: 1.5px solid var(--border-medium);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 32px; font-weight: 500;
+      color: var(--accent); letter-spacing: 3px; position: relative;
+    }
+    .founder-avatar::after {
+      content: ''; position: absolute; inset: -6px; border-radius: 50%;
+      border: 1px solid rgba(0,210,190,0.1);
+    }
+    .founder-avatar img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+    }
+    .founder-name-side { text-align: center; }
+    .founder-name-side h3 { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+    .founder-name-side span {
+      font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--accent-dim);
+    }
+    .founder-body {
+      background: var(--bg-surface);
+      padding: clamp(36px, 4vw, 56px) clamp(32px, 4vw, 52px);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .founder-body p {
+      font-size: 15.5px; color: var(--text-secondary); line-height: 1.85;
+      font-weight: 300; margin-bottom: 20px;
+    }
+    .founder-body p:last-of-type { margin-bottom: 0; }
+    .founder-body p strong { color: var(--text-primary); font-weight: 500; }
+    .founder-credentials {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px;
+    }
+    .founder-credential {
+      font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--accent-dim);
+      padding: 5px 14px; border: 1px solid var(--border-accent);
+      border-radius: 100px; background: var(--accent-glow);
+    }
+    .founder-personal {
+      margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle);
+      font-size: 14px; color: var(--text-tertiary); line-height: 1.7;
+      font-weight: 300; font-style: italic;
+    }
+    @media (max-width: 768px) {
+      .founder-profile { grid-template-columns: 1fr; }
+    }
 
     /* ── CTA BLOCK ── */
     .cta-block {
       background: var(--bg-surface); border: 1px solid var(--border-medium);
       border-radius: 8px; padding: clamp(48px, 6vw, 72px) clamp(32px, 4vw, 56px);
-      text-align: center; margin-top: 100px;
+      text-align: center; margin-top: 64px;
     }
     .cta-block .section-eyebrow { justify-content: center; }
     .cta-block .section-title { margin: 14px auto 14px; }
@@ -336,7 +598,7 @@
     .divider { max-width: 1160px; margin: 0 auto; height: 1px; background: var(--border-subtle); }
     .footer {
       max-width: 1160px; margin: 0 auto;
-      padding: 56px clamp(24px, 5vw, 56px) 48px;
+      padding: 40px clamp(24px, 5vw, 56px) 36px;
       display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 32px;
     }
     .footer-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; }
@@ -379,19 +641,15 @@
   <nav class="nav" id="nav">
     <div class="nav-logo" onclick="goTo('home')">
       <div class="nav-logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="#00d2be">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 2a10 10 0 0 1 0 20"/>
-          <path d="M12 2a10 10 0 0 0 0 20"/>
-        </svg>
+        <img src="images/sl-logo.png" alt="SL">
       </div>
-      <span class="nav-logo-text"><span class="nav-logo-text-full">Strange Loop </span>Neuro</span>
+      <span class="nav-logo-text">Strange Loop Neurosciences</span>
     </div>
     <div class="nav-links" id="navLinks">
       <button class="nav-link active" data-page="home" onclick="goTo('home')">Home</button>
+      <button class="nav-link" data-page="team" onclick="goTo('team')">About</button>
       <button class="nav-link" data-page="research" onclick="goTo('research')">Research</button>
       <button class="nav-link" data-page="services" onclick="goTo('services')">Services</button>
-      <button class="nav-link" data-page="team" onclick="goTo('team')">Team</button>
     </div>
     <button class="nav-toggle" id="navToggle" onclick="toggleMobileNav()" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -401,15 +659,27 @@
   <!-- ═══════════ HOME ═══════════ -->
   <main class="page active" id="page-home">
     <section class="hero">
-      <div class="hero-bg"><canvas id="neural-canvas"></canvas></div>
-      <div class="hero-content">
-        <div class="hero-badge">Non-Invasive Neural Interfaces</div>
+      <div class="hero-top">
         <h1>Building the World's First Non-Invasive <em>Brain-to-AI</em> Interface</h1>
-        <p class="hero-sub">Strange Loop Neurosciences is a research lab pioneering novel BCI paradigms and developing non-invasive neural interface systems to connect human cognition directly to artificial intelligence, all without surgery.</p>
+      </div>
+      <div class="hero-canvas-band">
+        <canvas id="neural-canvas"></canvas>
+      </div>
+      <div class="hero-bottom">
+        <p class="hero-sub">Strange Loop Neurosciences is a research lab pioneering novel BCI paradigms and developing non-invasive interface systems to connect human cognition directly to artificial intelligence, all without surgery.</p>
         <div class="hero-est">Est. 2024</div>
         <div class="hero-cta">
           <button class="btn btn-primary" onclick="goTo('research')">Our Research</button>
-          <button class="btn btn-ghost" onclick="goTo('services')">Explore Services</button>
+          <button class="btn btn-ghost" onclick="goTo('services')">Our Offerings</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0; padding-bottom: 0;">
+      <div class="reveal">
+        <div class="quote-block">
+          <div class="quote-text">"In the end, we self-perceiving, self-inventing, locked-in mirages are little miracles of self-reference."</div>
+          <div class="quote-attr">Douglas Hofstadter, I Am a Strange Loop</div>
         </div>
       </div>
     </section>
@@ -417,88 +687,107 @@
     <section class="section">
       <div class="reveal">
         <div class="stats-row">
-          <div class="stat"><div class="stat-num">47</div><div class="stat-label">Publications</div></div>
-          <div class="stat"><div class="stat-num">12</div><div class="stat-label">Patents Filed</div></div>
-          <div class="stat"><div class="stat-num">8ms</div><div class="stat-label">Signal Latency</div></div>
-          <div class="stat"><div class="stat-num">97.3%</div><div class="stat-label">Decode Accuracy</div></div>
+          <div class="stat"><div class="stat-num">1st</div><div class="stat-label">Non-Invasive B2AI</div></div>
+          <div class="stat"><div class="stat-num">6</div><div class="stat-label">Publications</div></div>
+          <div class="stat"><div class="stat-num">7</div><div class="stat-label">Patents Filed</div></div>
+          <div class="stat"><div class="stat-num">2024</div><div class="stat-label">Founded</div></div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="reveal">
-        <div class="section-eyebrow">The Problem</div>
-        <h2 class="section-title">AI is Powerful.<br>The Interface is Broken.</h2>
-        <p class="section-desc">Today's AI systems are bottlenecked by keyboards, mice, and touchscreens — interfaces designed decades ago. We're building a direct bridge between the human brain and AI, enabling communication at the speed of thought.</p>
-      </div>
-      <div class="reveal" style="margin-top: 72px;">
-        <div class="section-eyebrow">Our Approach</div>
-        <h2 class="section-title">No Surgery. No Compromise.</h2>
-        <p class="section-desc">Using proprietary high-density sensor arrays and real-time neural decoding algorithms, we extract cognitive signals with surgical-grade precision — entirely from outside the skull. Our platform learns and adapts to each user, improving continuously.</p>
+    <section class="section" style="padding-top: 0;">
+      <div class="reveal" style="text-align: center;">
+        <div class="section-eyebrow" style="justify-content: center;">Our Approach</div>
+        <h2 class="section-title">Changing the Paradigm</h2>
+        <p class="section-desc" style="margin-left: auto; margin-right: auto;">Modern brain-computer interface paradigms overlook a key aspect of the Strange Loop of the human organism. Biology is agentic. Malleable. Trainable. By combining cutting-edge engineering and neurotech with mastery of behavioral and cognitive conditioning, we unlock novel applications far exceeding the status quo.</p>
+        <p class="section-desc" style="margin-left: auto; margin-right: auto; margin-top: 24px;">In 2025, we demonstrated the world's first non-invasive B2AI, connecting the human brain directly to an LLM. Now, we are engineering new ways to put more of our biology under conscious control.</p>
       </div>
     </section>
   </main>
 
   <!-- ═══════════ RESEARCH ═══════════ -->
   <main class="page" id="page-research">
-    <section class="section" style="padding-top: clamp(100px, 12vw, 140px);">
+    <section class="section" style="padding-top: clamp(80px, 8vw, 100px);">
       <div class="reveal">
         <div class="section-eyebrow">Research</div>
-        <h2 class="section-title">Pushing the Boundaries of<br>Neural Interface Science</h2>
-        <p class="section-desc">Our interdisciplinary team spans neuroscience, AI, bioelectronics, and signal processing. Every breakthrough in the lab moves us closer to seamless brain-AI communication.</p>
+        <h2 class="section-title">Expanding the Realm of Conscious Control<br>by Engineering Strange Loops</h2>
+        <p class="section-desc">Our research pushes the boundaries of what is possible in brain-computer interfacing, laying the groundwork for a new approach to Human-AI integration. We coined the terms B2AI (Brain-to-AI Interface), Therapeutic Neural Reinforcement (TNR), and BasCI (Basal Cognitive Interfacing) to encapsulate the full scope of our paradigm.</p>
       </div>
+    </section>
+
+    <!-- ── PILLAR 1: Brain-to-AI Interfacing ── -->
+    <section class="section" style="padding-top: 0;">
       <div class="reveal">
-        <div class="card-grid">
-          <div class="card">
-            <span class="card-icon">◎</span>
-            <h3>Non-Invasive Neural Decoding</h3>
-            <p>Extracting high-fidelity cognitive signals through advanced sensor arrays that sit on the scalp — no surgery required. Our proprietary algorithms achieve resolution previously possible only with implanted electrodes.</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">⟁</span>
-            <h3>Real-Time AI Translation</h3>
-            <p>Converting raw neural patterns into structured AI-compatible data streams with sub-10ms latency. Our models bridge the gap between biological neural networks and artificial ones.</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">◈</span>
-            <h3>Adaptive Signal Processing</h3>
-            <p>Self-calibrating systems that learn each user's unique neural signature over time, continuously improving accuracy and reducing noise without manual reconfiguration.</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">⬡</span>
-            <h3>Cognitive State Mapping</h3>
-            <p>Building high-resolution maps of attention, intention, and emotional state in real time — enabling intuitive AI interaction without physical input devices.</p>
+        <div class="research-pillar">
+          <div class="pillar-header">
+            <div class="pillar-text">
+              <div class="pillar-number">01 — B2AI</div>
+              <h3>Brain-to-AI <em>Interfacing</em></h3>
+              <p>We are building the world's first non-invasive brain-to-AI interfaces, systems that allow direct two-way communication between the human brain and an AI agent. No implants. No surgery. Just a wearable device that connects your cognition directly to AI, unlocking new heights of processing power.</p>
+              <div class="pillar-tags">
+                <span class="pillar-tag">Non-Invasive</span>
+                <span class="pillar-tag">Real-Time Decoding</span>
+                <span class="pillar-tag">Wearable</span>
+                <span class="pillar-tag">LLM Integration</span>
+              </div>
+            </div>
+            <div class="pillar-visual">
+              <div class="pillar-img-placeholder">
+                <img src="images/Seebold_modeling_world_first_B2AI.png" alt="World's First Non-Invasive Brain-to-AI Interface">
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- ── PILLAR 2: Therapeutic Neural Reinforcement ── -->
+    <section class="section" style="padding-top: 0;">
       <div class="reveal">
-        <div class="section-eyebrow">Selected Publications</div>
-        <h2 class="section-title">Recent Work</h2>
+        <div class="research-pillar">
+          <div class="pillar-header reverse">
+            <div class="pillar-text">
+              <div class="pillar-number">02 — TNR</div>
+              <h3>Therapeutic Neural <em>Reinforcement</em></h3>
+              <p>The brain is not a static organ - it rewires itself in response to structured feedback. Our TNR program leverages this plasticity through precision neurostimulation, operant conditioning, and closed-loop biofeedback to open new applications for biological interfacing spanning cognitive resilience, performance optimization, rehabilitation, and beyond.</p>
+              <div class="pillar-tags">
+                <span class="pillar-tag">Neurostimulation</span>
+                <span class="pillar-tag">Operant Conditioning</span>
+                <span class="pillar-tag">Closed-Loop Feedback</span>
+                <span class="pillar-tag">Neural Plasticity</span>
+              </div>
+            </div>
+            <div class="pillar-visual">
+              <div class="pillar-img-placeholder">
+                <img src="images/TNR_demo.png" alt="Therapeutic Neural Reinforcement Demo">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="reveal" style="margin-top: 40px;">
-        <div class="pub-list">
-          <div class="pub-item">
-            <div><div class="pub-title">High-Resolution Non-Invasive Neural Decoding via Scalp-Mounted Micro-Arrays</div><div class="pub-journal">Nature Neuroscience</div></div>
-            <div class="pub-year">2025</div>
-          </div>
-          <div class="pub-item">
-            <div><div class="pub-title">Real-Time Cognitive State Classification Using Lightweight Transformer Architectures</div><div class="pub-journal">NeurIPS</div></div>
-            <div class="pub-year">2025</div>
-          </div>
-          <div class="pub-item">
-            <div><div class="pub-title">Adaptive Noise Cancellation in Dense EEG for Brain-Computer Interface Applications</div><div class="pub-journal">IEEE TBME</div></div>
-            <div class="pub-year">2024</div>
-          </div>
-          <div class="pub-item">
-            <div><div class="pub-title">Sub-10ms Neural Signal Translation: Architecture and Benchmarks</div><div class="pub-journal">ICML</div></div>
-            <div class="pub-year">2024</div>
-          </div>
-          <div class="pub-item">
-            <div><div class="pub-title">Longitudinal Calibration Drift in Non-Invasive BCI Systems: A 12-Month Study</div><div class="pub-journal">Brain</div></div>
-            <div class="pub-year">2024</div>
+    </section>
+
+    <!-- ── PILLAR 3: Basal Cognitive Interfacing ── -->
+    <section class="section" style="padding-top: 0;">
+      <div class="reveal">
+        <div class="research-pillar">
+          <div class="pillar-header">
+            <div class="pillar-text">
+              <div class="pillar-number">03 — BasCI</div>
+              <h3>Basal Cognitive <em>Interfacing</em></h3>
+              <p>The same principles driving cognition in the human nervous system have been shown to be at play in non-neural tissue. Altering bioelectric state can modify organism shape, enhance wound healing, and even kick-start regeneration in non-regenerative species. If cognition is a spectrum that exists below the brain, then our interfaces should extend there too.</p>
+              <div class="pillar-tags">
+                <span class="pillar-tag">Bioelectric Networks</span>
+                <span class="pillar-tag">Basal Cognition</span>
+                <span class="pillar-tag">AI-Automated Protocols</span>
+                <span class="pillar-tag">Wound Healing &amp; Regeneration</span>
+              </div>
+            </div>
+            <div class="pillar-visual">
+              <div class="pillar-img-placeholder">
+                <img src="images/Seebold_2H_planaria_plus_1H_control.JPG" alt="Bioelectric control of regenerative outcomes in planaria">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -507,29 +796,25 @@
 
   <!-- ═══════════ SERVICES ═══════════ -->
   <main class="page" id="page-services">
-    <section class="section" style="padding-top: clamp(100px, 12vw, 140px);">
+    <section class="section" style="padding-top: clamp(80px, 8vw, 100px);">
       <div class="reveal">
-        <div class="section-eyebrow">Services</div>
-        <h2 class="section-title">From Lab to Production</h2>
-        <p class="section-desc">We translate cutting-edge neural interface research into deployable products and services. Whether you're building on our platform or partnering on R&D, we're ready.</p>
+        <div class="section-eyebrow">Our Offerings</div>
+        <h2 class="section-title">What We Offer</h2>
+        <p class="section-desc">We build custom brain-to-AI systems and support the research ecosystem around them - from initial concept through published results.</p>
       </div>
       <div class="reveal">
         <div class="service-list">
           <div class="service-item">
-            <div class="service-tag">Enterprise</div>
-            <div><h3>Enterprise BCI Integration</h3><p>End-to-end deployment of brain-computer interface systems within your organization. From hardware provisioning to software integration, we handle the full stack.</p></div>
+            <div class="service-tag">B2AI</div>
+            <div><h3>Custom Brain-to-AI Interfaces</h3><p>We design and build bespoke non-invasive brain-to-AI interface systems tailored to your application. Whether you need a research prototype or a purpose-built system for a specific cognitive task, we handle the full pipeline - hardware selection, signal processing, AI model training, and integration. You define the problem; we deliver a working B2AI.</p><p style="font-size: 12px; color: var(--text-tertiary); line-height: 1.7; margin-top: 14px; font-weight: 300; font-style: italic;">All custom B2AI systems are investigational research devices intended for use in controlled research settings only. They are not medical devices. They have not been evaluated, cleared, or approved by the FDA or any regulatory body. They are not intended to diagnose, treat, cure, or prevent any disease or medical condition. Purchasers are responsible for ensuring use complies with all applicable institutional, local, and federal regulations.</p></div>
           </div>
           <div class="service-item">
-            <div class="service-tag">Analytics</div>
-            <div><h3>Neural Data Analytics</h3><p>Advanced analytics platform for cognitive data. Understand workforce attention patterns, cognitive load, and decision-making processes at unprecedented granularity.</p></div>
+            <div class="service-tag">Design</div>
+            <div><h3>Research Design</h3><p>Rigorous experimental design is the foundation of credible neuroscience. We help labs, startups, and institutions architect BCI, neurotech, and human subjects research studies from the ground up - participant protocols, IRB strategy, signal acquisition pipelines, statistical frameworks, and control conditions. We bring deep expertise in both the neuroscience and the engineering, so your study design accounts for the realities of both.</p></div>
           </div>
           <div class="service-item">
-            <div class="service-tag">R&amp;D</div>
-            <div><h3>Custom Research Partnerships</h3><p>Collaborate with our research team on bespoke neural interface projects. We bring the neuroscience and AI expertise — you bring the domain challenge.</p></div>
-          </div>
-          <div class="service-item">
-            <div class="service-tag">Platform</div>
-            <div><h3>Developer API &amp; SDK</h3><p>Build on top of our neural decoding platform. RESTful APIs, Python and JS SDKs, real-time WebSocket streams, and comprehensive documentation.</p></div>
+            <div class="service-tag">Pubs</div>
+            <div><h3>Publication Support</h3><p>Getting from data to published paper is its own discipline. We provide end-to-end publication support - manuscript drafting, figure design, statistical review, journal selection strategy, and response to reviewers. Whether you're targeting Nature Neuroscience or a specialized BCI journal, we help you tell your story with clarity and precision.</p></div>
           </div>
         </div>
       </div>
@@ -537,10 +822,10 @@
         <div class="cta-block">
           <div class="section-eyebrow">Get Started</div>
           <h2 class="section-title">Ready to Connect?</h2>
-          <p>Reach out to discuss how our neural interface technology can transform your organization.</p>
+          <p>Reach out to discuss how we can support your next project - from a custom B2AI build to getting your research published.</p>
           <div class="cta-btns">
-            <button class="btn btn-primary">Contact Us</button>
-            <button class="btn btn-ghost" onclick="goTo('research')">Read Our Research</button>
+            <a href="mailto:patrick.seebold@strangeloopneuro.com" class="btn btn-primary">Contact Us</a>
+            <button class="btn btn-ghost" onclick="goTo('research')">Our Research</button>
           </div>
         </div>
       </div>
@@ -549,58 +834,37 @@
 
   <!-- ═══════════ TEAM ═══════════ -->
   <main class="page" id="page-team">
-    <section class="section" style="padding-top: clamp(100px, 12vw, 140px);">
+    <section class="section" style="padding-top: clamp(80px, 8vw, 100px);">
       <div class="reveal">
-        <div class="section-eyebrow">Team</div>
-        <h2 class="section-title">World-Class Minds.<br>One Mission.</h2>
-        <p class="section-desc">Our leadership team combines decades of experience across neuroscience, AI, bioelectronics, and clinical research — drawn from MIT, Stanford, DARPA, DeepMind, and beyond.</p>
+        <div class="section-eyebrow">Founder</div>
+        <h2 class="section-title">Scientist-Built, Mission-Driven.</h2>
       </div>
-      <div class="reveal">
-        <div class="team-grid">
-          <div class="team-card">
-            <div class="team-avatar">EV</div>
-            <h3>Dr. Elena Vasquez</h3>
-            <span class="team-role">Founder &amp; CEO</span>
-            <p class="team-bio">Former MIT neuroscience faculty. 15 years pioneering non-invasive neural signal decoding. Published 80+ papers on brain-computer interfaces.</p>
+      <div class="reveal" style="margin-top: 48px;">
+        <div class="founder-profile">
+          <div class="founder-photo">
+            <div class="founder-avatar">
+              <img src="images/Seebold_headshot.png" alt="Patrick Seebold, Ph.D.">
+            </div>
+            <div class="founder-name-side">
+              <h3>Patrick Seebold, Ph.D.</h3>
+              <span>Founder &amp; CEO</span>
+            </div>
           </div>
-          <div class="team-card">
-            <div class="team-avatar">JO</div>
-            <h3>Dr. James Okafor</h3>
-            <span class="team-role">Chief Science Officer</span>
-            <p class="team-bio">Ex-DARPA program manager. Led a $120M initiative in advanced neural engineering. Expert in high-density EEG and fNIRS systems.</p>
-          </div>
-          <div class="team-card">
-            <div class="team-avatar">MC</div>
-            <h3>Dr. Mei-Lin Chen</h3>
-            <span class="team-role">VP of AI Research</span>
-            <p class="team-bio">Former DeepMind senior researcher. Specialist in real-time neural signal processing and transformer architectures for BCI decoding.</p>
-          </div>
-          <div class="team-card">
-            <div class="team-avatar">AP</div>
-            <h3>Dr. Aarav Patel</h3>
-            <span class="team-role">Head of Hardware</span>
-            <p class="team-bio">Stanford PhD in bioelectronics. Designed wearable neural sensors adopted by three Fortune 500 medical device companies.</p>
-          </div>
-          <div class="team-card">
-            <div class="team-avatar">SL</div>
-            <h3>Sarah Lindström</h3>
-            <span class="team-role">Chief Operating Officer</span>
-            <p class="team-bio">Scaled two neurotech startups from seed to Series C. Background in biomedical engineering operations and regulatory strategy.</p>
-          </div>
-          <div class="team-card">
-            <div class="team-avatar">DK</div>
-            <h3>Dr. David Kimura</h3>
-            <span class="team-role">Director of Clinical Trials</span>
-            <p class="team-bio">Board-certified neurologist. Led multi-site clinical studies across 12 countries. Expertise in FDA/CE regulatory pathways for neural devices.</p>
+          <div class="founder-body">
+            <p>Founder Patrick Seebold holds a <strong>PhD in Psychology</strong> and a <strong>Master's in Statistical Genetics</strong> - a rare combination of training that bridges neurostimulation, engineering, and quantitative biology.</p>
+            <p>Dr. Seebold trained in <strong>Transcranial Magnetic Stimulation (TMS) at the Duke University School of Medicine</strong>, and has a track record of over <strong>$650,000 in awarded funding</strong>, with successful grants written for the National Science Foundation (NSF), the Foresight Institute, the Comparative Medicine Institute, and corporate partners.</p>
+            <p>This work is deeply personal. A family member spent years battling a tumor of the brainstem, providing Dr. Seebold a front-row seat to the fragility and extraordinary adaptability of the human brain. This experience informs what we do at Strange Loop Neurosciences: <strong>develop systems that work with the brain and biology to promote wellness, health, and prosperity.</strong></p>
+            <div class="founder-personal">Classically-trained Pianist. Runner of Marathons. Self-taught Audio Engineer.</div>
           </div>
         </div>
       </div>
+
       <div class="reveal">
         <div class="cta-block">
-          <div class="section-eyebrow">Careers</div>
-          <h2 class="section-title">Join the Team</h2>
-          <p>We're hiring exceptional researchers, engineers, and operators who want to shape the future of human-AI interaction.</p>
-          <button class="btn btn-primary">View Open Positions</button>
+          <div class="section-eyebrow">Collaborate</div>
+          <h2 class="section-title">Work With Us</h2>
+          <p>Strange Loop Neurosciences is actively seeking research collaborators, institutional partners, and exceptional scientists who want to shape the future of Human-AI co-evolution.</p>
+          <a href="mailto:patrick.seebold@strangeloopneuro.com" class="btn btn-primary">Get in Touch</a>
         </div>
       </div>
     </section>
@@ -611,13 +875,11 @@
   <footer class="footer">
     <div>
       <div class="footer-name">Strange Loop Neurosciences, LLC</div>
-      <div class="footer-copy">&copy; 2024–2026 All rights reserved. Building the future of human-AI interfaces.</div>
+      <div class="footer-copy">&copy; 2024–2026 All rights reserved. Building the future of Human-AI co-evolution.</div>
     </div>
     <div>
       <div class="footer-links">
-        <button class="footer-link">Privacy</button>
-        <button class="footer-link">Terms</button>
-        <button class="footer-link">Contact</button>
+        <a href="mailto:patrick.seebold@strangeloopneuro.com" class="footer-link">Contact</a>
       </div>
     </div>
   </footer>
@@ -665,59 +927,303 @@
       const canvas = document.getElementById('neural-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      let nodes = [];
-      let animId;
+      let brainNodes = [];
+      let synapses = [];
+      let pulses = [];
+      let eegPoints = [];
+      let time = 0;
+      let cx, cy, brainRx, brainRy;
+      let dpr = window.devicePixelRatio || 1;
+      let displayWidth, displayHeight;
+
       function resize() {
         const p = canvas.parentElement;
-        canvas.width = p.offsetWidth;
-        canvas.height = p.offsetHeight;
-        initNodes();
+        dpr = window.devicePixelRatio || 1;
+        displayWidth = p.offsetWidth || window.innerWidth;
+        displayHeight = p.offsetHeight || 400;
+
+        // Guard against zero dimensions
+        if (displayWidth < 10 || displayHeight < 10) return;
+
+        // Set canvas buffer to full resolution
+        canvas.width = displayWidth * dpr;
+        canvas.height = displayHeight * dpr;
+
+        // Scale CSS size back down so it displays at correct size
+        canvas.style.width = displayWidth + 'px';
+        canvas.style.height = displayHeight + 'px';
+
+        // Scale all drawing operations up to match
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        cx = displayWidth * 0.5;
+        cy = displayHeight * 0.5;
+        brainRx = Math.min(displayWidth * 0.3, 300);
+        brainRy = Math.min(displayHeight * 0.38, 260);
+        initBrain();
       }
-      function initNodes() {
-        nodes = [];
-        const count = Math.floor((canvas.width * canvas.height) / 20000);
-        for (let i = 0; i < count; i++) {
-          nodes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.25,
-            vy: (Math.random() - 0.5) * 0.25,
-            r: Math.random() * 1.4 + 0.4
+
+      function initBrain() {
+        brainNodes = [];
+        synapses = [];
+        pulses = [];
+
+        // Generate brain-shaped point cloud (ellipsoid with cortical folds)
+        const nodeCount = Math.max(60, Math.min(Math.floor((displayWidth * displayHeight) / 6000), 180));
+        for (let i = 0; i < nodeCount; i++) {
+          // Spherical distribution squeezed into brain shape
+          const theta = Math.random() * Math.PI * 2;
+          const phi = Math.acos(2 * Math.random() - 1);
+          let r = 0.6 + Math.random() * 0.4;
+
+          // Cortical fold distortion
+          r += Math.sin(theta * 6) * 0.08 + Math.cos(phi * 8) * 0.06;
+
+          // Brain asymmetry: slightly wider at top, narrower at stem
+          const yFactor = Math.cos(phi);
+          const stemNarrow = yFactor < -0.5 ? (1 + yFactor * 0.6) : 1;
+
+          let x = cx + Math.sin(phi) * Math.cos(theta) * brainRx * r * stemNarrow;
+          let y = cy + Math.cos(phi) * brainRy * r * 0.85;
+          let z = Math.sin(phi) * Math.sin(theta) * r; // depth for sizing
+
+          // Brain hemisphere split: slight indent at midline
+          const midlineDist = Math.abs(Math.sin(phi) * Math.cos(theta));
+          if (midlineDist < 0.12 && yFactor > -0.3) {
+            const pushOut = (0.12 - midlineDist) * brainRx * 0.3;
+            x += Math.cos(theta) > 0 ? pushOut : -pushOut;
+          }
+
+          brainNodes.push({
+            x: x,
+            y: y,
+            z: z,
+            baseX: x,
+            baseY: y,
+            r: (0.8 + z * 0.8) * (displayWidth > 600 ? 1.2 : 0.9),
+            brightness: 0.3 + Math.random() * 0.4,
+            phase: Math.random() * Math.PI * 2,
+            freq: 0.5 + Math.random() * 2,
+            region: theta < Math.PI ? 'left' : 'right',
+            depth: z
           });
         }
-      }
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        nodes.forEach(n => {
-          n.x += n.vx; n.y += n.vy;
-          if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-          if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
-        });
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i + 1; j < nodes.length; j++) {
-            const dx = nodes[i].x - nodes[j].x;
-            const dy = nodes[i].y - nodes[j].y;
+
+        // Generate synaptic connections (nearby nodes)
+        for (let i = 0; i < brainNodes.length; i++) {
+          for (let j = i + 1; j < brainNodes.length; j++) {
+            const dx = brainNodes[i].x - brainNodes[j].x;
+            const dy = brainNodes[i].y - brainNodes[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 110) {
-              ctx.beginPath();
-              ctx.moveTo(nodes[i].x, nodes[i].y);
-              ctx.lineTo(nodes[j].x, nodes[j].y);
-              ctx.strokeStyle = 'rgba(0,210,190,' + (0.07 * (1 - dist / 110)) + ')';
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
+            const maxDist = brainRx * 0.4;
+            if (dist < maxDist && Math.random() < 0.45) {
+              synapses.push({
+                from: i,
+                to: j,
+                dist: dist,
+                maxDist: maxDist
+              });
             }
           }
         }
-        nodes.forEach(n => {
+
+        // Init EEG waveform points
+        eegPoints = [];
+        const eegCount = Math.floor(displayWidth / 2);
+        for (let i = 0; i < eegCount; i++) {
+          eegPoints.push(0);
+        }
+      }
+
+      function spawnPulse() {
+        if (synapses.length === 0) return;
+        const syn = synapses[Math.floor(Math.random() * synapses.length)];
+        const reverse = Math.random() > 0.5;
+        pulses.push({
+          synapse: syn,
+          t: 0,
+          speed: 0.008 + Math.random() * 0.015,
+          reverse: reverse,
+          color: Math.random() > 0.35 ? 'accent' : 'blue'
+        });
+      }
+
+      function draw() {
+        time += 0.016;
+        ctx.clearRect(0, 0, displayWidth, displayHeight);
+
+        // Spawn pulses
+        if (Math.random() < 0.25) spawnPulse();
+
+        // Draw outer brain glow
+        const glowGrad = ctx.createRadialGradient(cx, cy, brainRx * 0.2, cx, cy, brainRx * 1.3);
+        glowGrad.addColorStop(0, 'rgba(0,210,190,0.02)');
+        glowGrad.addColorStop(0.5, 'rgba(0,210,190,0.008)');
+        glowGrad.addColorStop(1, 'transparent');
+        ctx.fillStyle = glowGrad;
+        ctx.fillRect(0, 0, displayWidth, displayHeight);
+
+        // Draw synaptic connections
+        synapses.forEach(syn => {
+          const a = brainNodes[syn.from];
+          const b = brainNodes[syn.to];
+          const avgDepth = (a.depth + b.depth) / 2;
+          const distRatio = 1 - (syn.dist / syn.maxDist);
+          const opacity = (0.25 + avgDepth * 0.2) * (0.5 + distRatio * 0.5);
           ctx.beginPath();
-          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(0,210,190,0.2)';
+          ctx.moveTo(a.x, a.y);
+          const midX = (a.x + b.x) / 2 + (a.y - b.y) * 0.1;
+          const midY = (a.y + b.y) / 2 + (b.x - a.x) * 0.1;
+          ctx.quadraticCurveTo(midX, midY, b.x, b.y);
+          ctx.strokeStyle = 'rgba(0,230,210,' + opacity + ')';
+          ctx.lineWidth = 1.5 + avgDepth * 1.0;
+          ctx.stroke();
+        });
+
+        // Draw and update pulses
+        pulses = pulses.filter(p => p.t <= 1);
+        pulses.forEach(p => {
+          p.t += p.speed;
+          const t = p.reverse ? 1 - p.t : p.t;
+          const syn = p.synapse;
+          const a = brainNodes[syn.from];
+          const b = brainNodes[syn.to];
+          const midX = (a.x + b.x) / 2 + (a.y - b.y) * 0.1;
+          const midY = (a.y + b.y) / 2 + (b.x - a.x) * 0.1;
+
+          // Quadratic bezier position
+          const mt = 1 - t;
+          const px = mt * mt * a.x + 2 * mt * t * midX + t * t * b.x;
+          const py = mt * mt * a.y + 2 * mt * t * midY + t * t * b.y;
+
+          const pulseR = 2.5 + Math.sin(p.t * Math.PI) * 1.5;
+          const alpha = Math.sin(p.t * Math.PI) * 0.8;
+
+          if (p.color === 'accent') {
+            ctx.fillStyle = 'rgba(0,210,190,' + alpha + ')';
+            const grd = ctx.createRadialGradient(px, py, 0, px, py, pulseR * 4);
+            grd.addColorStop(0, 'rgba(0,210,190,' + (alpha * 0.4) + ')');
+            grd.addColorStop(1, 'transparent');
+            ctx.fillStyle = grd;
+            ctx.fillRect(px - pulseR * 4, py - pulseR * 4, pulseR * 8, pulseR * 8);
+            ctx.beginPath();
+            ctx.arc(px, py, pulseR, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,210,190,' + alpha + ')';
+            ctx.fill();
+          } else {
+            ctx.fillStyle = 'rgba(77,141,255,' + alpha + ')';
+            const grd = ctx.createRadialGradient(px, py, 0, px, py, pulseR * 4);
+            grd.addColorStop(0, 'rgba(77,141,255,' + (alpha * 0.3) + ')');
+            grd.addColorStop(1, 'transparent');
+            ctx.fillStyle = grd;
+            ctx.fillRect(px - pulseR * 4, py - pulseR * 4, pulseR * 8, pulseR * 8);
+            ctx.beginPath();
+            ctx.arc(px, py, pulseR, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(77,141,255,' + alpha + ')';
+            ctx.fill();
+          }
+
+          // Brighten nearby nodes
+          [syn.from, syn.to].forEach(idx => {
+            const node = brainNodes[idx];
+            node.brightness = Math.min(1, node.brightness + 0.05);
+          });
+        });
+
+        // Draw brain nodes
+        brainNodes.forEach(n => {
+          // Gentle oscillation
+          const osc = Math.sin(time * n.freq + n.phase) * 0.15;
+          n.brightness = Math.max(0.2 + osc, n.brightness * 0.97);
+
+          const alpha = n.brightness * (0.3 + n.depth * 0.4);
+          const r = n.r * (0.8 + n.brightness * 0.4);
+
+          // Glow
+          if (n.brightness > 0.5) {
+            const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 5);
+            grd.addColorStop(0, 'rgba(0,210,190,' + (alpha * 0.15) + ')');
+            grd.addColorStop(1, 'transparent');
+            ctx.fillStyle = grd;
+            ctx.fillRect(n.x - r * 5, n.y - r * 5, r * 10, r * 10);
+          }
+
+          // Node dot
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(0,210,190,' + alpha + ')';
           ctx.fill();
         });
-        animId = requestAnimationFrame(draw);
+
+        // ── EEG Waveform at bottom ──
+        const eegY = displayHeight * 0.85;
+        const eegH = 25;
+        const eegW = displayWidth;
+
+        // Shift waveform
+        eegPoints.shift();
+        // Composite EEG signal: alpha + beta + gamma bands + occasional spikes
+        let val = 0;
+        val += Math.sin(time * 8.5) * 0.3;           // alpha ~8-12Hz
+        val += Math.sin(time * 18.2) * 0.15;          // beta ~13-30Hz
+        val += Math.sin(time * 42) * 0.08;            // gamma ~30-100Hz
+        val += Math.sin(time * 3.2) * 0.2;            // theta
+        val += (Math.random() - 0.5) * 0.15;          // noise
+        // Occasional sharp spike
+        if (Math.random() < 0.005) val += (Math.random() > 0.5 ? 1 : -1) * (0.6 + Math.random() * 0.4);
+        eegPoints.push(val);
+
+        // Draw EEG baseline
+        ctx.beginPath();
+        ctx.moveTo(0, eegY);
+        ctx.lineTo(eegW, eegY);
+        ctx.strokeStyle = 'rgba(0,210,190,0.08)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Draw EEG trace
+        ctx.beginPath();
+        for (let i = 0; i < eegPoints.length; i++) {
+          const x = (i / eegPoints.length) * eegW;
+          const y = eegY + eegPoints[i] * eegH;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(0,230,210,0.4)';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        // EEG glow
+        ctx.beginPath();
+        for (let i = 0; i < eegPoints.length; i++) {
+          const x = (i / eegPoints.length) * eegW;
+          const y = eegY + eegPoints[i] * eegH;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(0,210,190,0.12)';
+        ctx.lineWidth = 8;
+        ctx.stroke();
+
+        requestAnimationFrame(draw);
       }
-      resize();
-      draw();
+
+      function start() {
+        resize();
+        // If dimensions were too small, retry after layout settles
+        if (brainNodes.length === 0) {
+          setTimeout(start, 100);
+          return;
+        }
+        draw();
+      }
+
+      // Try to start immediately, but also listen for load in case layout isn't ready
+      if (document.readyState === 'complete') {
+        start();
+      } else {
+        window.addEventListener('load', start);
+      }
       window.addEventListener('resize', resize);
     })();
   </script>
